@@ -107,7 +107,7 @@ public class IntDeque {
     }
     
     public void show() {
-        System.out.printf("head=%d tail=%d size=%d capacity=%d\n", head, tail, size, capacity);
+        System.out.printf("capacity=%d size=%d head=%d tail=%d\n", capacity, size, head, tail);
         if (size == 0) {
             return;
         }
