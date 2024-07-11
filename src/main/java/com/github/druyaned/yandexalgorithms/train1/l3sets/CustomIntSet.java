@@ -44,8 +44,7 @@ public class CustomIntSet {
         }
         for (int j = 0; j < sizes[i]; ++j) {
             if (hashTable[i][j] == value) {
-                int lastValue = hashTable[i][sizes[i]-- - 1];
-                hashTable[i][j] = lastValue;
+                hashTable[i][j] = hashTable[i][--sizes[i]];
                 return true;
             }
         }

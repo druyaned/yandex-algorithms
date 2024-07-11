@@ -5,11 +5,6 @@ import java.util.Scanner;
 public class TestIntDeque {
     
     public static void main(String[] args) {
-        interactiveTest();
-    }
-    
-    private static void interactiveTest() {
-        System.out.println("\nInteractive test:");
         int capacity = 7;
         IntDeque deque = new IntDeque(capacity);
         System.out.println("  Menu description:");
@@ -18,33 +13,33 @@ public class TestIntDeque {
         System.out.println("    Remove first:  \"rf\"");
         System.out.println("    Remove last:   \"rl\"");
         System.out.println("    Quit:          \"q\"");
-        String menu = "Input (af, al, rf, rl, q): ";
-        String line;
+        String inputPrompt = "Input (af, al, rf, rl, q): ";
+        String inputLine;
         Scanner sin = new Scanner(System.in);
         deque.show();
-        System.out.print(menu);
-        while (!(line = sin.nextLine()).equals("q")) {
-            String[] elems = line.split(" ");
-            if (elems.length == 2) {
-                String cmd = elems[0];
-                int val = Integer.parseInt(elems[1]);
-                if (cmd.equals("af")) {
+        System.out.print(inputPrompt);
+        while (!(inputLine = sin.nextLine()).equals("q")) {
+            String[] parts = inputLine.split(" ");
+            String command = parts[0];
+            switch (command) {
+                case "af" -> {
+                    int val = Integer.parseInt(parts[1]);
                     deque.addFirst(val);
                 }
-                if (cmd.equals("al")) {
+                case "al" -> {
+                    int val = Integer.parseInt(parts[1]);
                     deque.addLast(val);
                 }
-            }
-            if (elems.length == 1) {
-                if (line.equals("rf")) {
+                case "rf" -> {
                     deque.removeFirst();
                 }
-                if (line.equals("rl")) {
+                case "rl" -> {
                     deque.removeLast();
                 }
+                default -> {}
             }
             deque.show();
-            System.out.print(menu);
+            System.out.print(inputPrompt);
         }
     }
     

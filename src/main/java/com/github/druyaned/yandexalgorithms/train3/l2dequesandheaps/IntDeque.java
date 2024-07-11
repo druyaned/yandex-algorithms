@@ -14,6 +14,14 @@ public class IntDeque {
         head = tail = 0;
     }
     
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    
+    public int capacity() {
+        return capacity;
+    }
+    
     public int size() {
         return size;
     }
@@ -23,7 +31,7 @@ public class IntDeque {
             throw new IndexOutOfBoundsException(String.format("index=%d size=%d", i, size));
         }
         return head <= tail ? arr[head + i] :
-                i < capacity - head ? arr[head + i] : arr[i - capacity + head];
+                i < capacity - head ? arr[head + i] : arr[i + head - capacity];
     }
     
     public int getFirst() {
@@ -32,6 +40,19 @@ public class IntDeque {
     
     public int getLast() {
         return arr[tail];
+    }
+    
+    public void set(int i, int newVal) {
+        if (i < 0 || i >= size) {
+            throw new IndexOutOfBoundsException(String.format("index=%d size=%d", i, size));
+        }
+        int ind = head <= tail ? head + i :
+                i < capacity - head ? head + i : i + head - capacity;
+        arr[ind] = newVal;
+    }
+    
+    public void clear() {
+        size = head = tail = 0;
     }
     
     public boolean addFirst(int val) {
@@ -111,35 +132,36 @@ public class IntDeque {
         if (size == 0) {
             return;
         }
-        if (head <= tail) {
-            System.out.print("ind:");
-            for (int i = head; i <= tail; ++i) {
-                System.out.printf(" %2d", i);
+        String elementFormat = " %" + maxLengthOfElement() + "d";
+        System.out.print("ind:");
+        for (int i = head; ; i = (i + 1) % capacity) {
+            System.out.printf(elementFormat, i);
+            if (i == tail) {
+                break;
             }
-            System.out.println();
-            System.out.print("arr:");
-            for (int i = head; i <= tail; ++i) {
-                System.out.printf(" %2d", arr[i]);
-            }
-            System.out.println();
-        } else {
-            System.out.print("ind:");
-            for (int i = head; i < capacity; ++i) {
-                System.out.printf(" %2d", i);
-            }
-            for (int i = 0; i <= tail; ++i) {
-                System.out.printf(" %2d", i);
-            }
-            System.out.println();
-            System.out.print("arr:");
-            for (int i = head; i < capacity; ++i) {
-                System.out.printf(" %2d", arr[i]);
-            }
-            for (int i = 0; i <= tail; ++i) {
-                System.out.printf(" %2d", arr[i]);
-            }
-            System.out.println();
         }
+        System.out.print("\narr:");
+        for (int i = head; ; i = (i + 1) % capacity) {
+            System.out.printf(elementFormat, arr[i]);
+            if (i == tail) {
+                break;
+            }
+        }
+        System.out.println();
+    }
+    
+    private int maxLengthOfElement() {
+        int maxLength = 1;
+        for (int i = head; ; i = (i + 1) % capacity) {
+            int lengthOfElement = Integer.toString(arr[i]).length();
+            if (maxLength < lengthOfElement) {
+                maxLength = lengthOfElement;
+            }
+            if (i == tail) {
+                break;
+            }
+        }
+        return maxLength;
     }
     
 }

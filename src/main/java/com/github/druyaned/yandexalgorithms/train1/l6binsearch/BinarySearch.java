@@ -7,13 +7,13 @@ public class BinarySearch {
     /**
      * Searches in the {@code sortedArray} the first {@code element}
      * which applies the expression {@code key <= element} ({@code bad -> good}).
-     * <br><i>Example</i>:<br>
+     * <p><i>Example</i>:<br>
      * <code>
-     * arr:  2  4  6  7<br>
      * ind:  0  1  2  3<br>
+     * arr:  2  4  6  7<br>
      * key:  1  2  3  4  5  6  7  8<br>
      * ans:  0  0  1  1  2  2  3 -1
-     * </code>
+     * </code></p>
      * 
      * @param sortedArray a sorted array to search the first acceptable element
      * @param key a value to search the first acceptable element
@@ -40,8 +40,8 @@ public class BinarySearch {
      * which applies the expression {@code key >= element} ({@code good -> bad}).
      * <br><i>Example</i>:<br>
      * <code>
-     * arr:  2  4  6  7<br>
      * ind:  0  1  2  3<br>
+     * arr:  2  4  6  7<br>
      * key:  1  2  3  4  5  6  7  8<br>
      * ans: -1  0  0  1  1  2  3  3
      * </code>
