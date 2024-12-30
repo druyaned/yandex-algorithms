@@ -262,7 +262,7 @@ public class DocumentFormatting {
             this.dy = dy;
         }
         @Override public void process(Text text, Cursor cursor, Nodes nodes) {
-            Token prevToken = text.tokens.getLast();
+            Token prevToken = text.tokens.get(text.tokens.size() - 1);
             startX = prevToken.startX + prevToken.width + dx;
             startY = prevToken.startY + dy;
             if (startX < 0) {
